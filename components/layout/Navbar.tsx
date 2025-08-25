@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { Navlinks } from "@/constants/Navlinks";
-import TopBar from "@/components/layout/TopBar";
+// import TopBar from "@/components/layout/TopBar";
 import ThemeToggle from "../ThemeToggle";
 
 
@@ -20,7 +20,7 @@ const Navbar = ({ onOpenMenu }: { onOpenMenu: () => void }) => {
   return (
     <header className="fixed top-0 w-full z-[1000]">
       {/* Top Info Bar */}
-      <TopBar />
+      {/* <TopBar /> */}
 
       {/* Main Navbar */}
       <nav
