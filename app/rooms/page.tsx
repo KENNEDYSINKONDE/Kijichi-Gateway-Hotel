@@ -33,6 +33,7 @@ const RoomsPage: React.FC = () => {
             <div className="relative w-full h-64">
               <Image src={room.image} alt={room.name} fill className="object-cover transition-transform duration-500 hover:scale-105"/>
             </div>
+            
             <div className="p-6 bg-white">
               <h2 className="text-xl font-bold">{room.name}</h2>
               <p className="mt-2 text-gray-600">{room.description}</p>

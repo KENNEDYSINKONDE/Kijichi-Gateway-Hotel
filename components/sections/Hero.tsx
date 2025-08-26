@@ -16,7 +16,7 @@ const sectionspage = () => {
         <video
           // ref={videoRef}
           className="absolute top-0 left-0 object-cover w-full h-full"
-          src="/videos/hero/herovideo.mp4"
+          src="/videos/hero/nightvideo.mp4"
           autoPlay
           loop
           muted
@@ -42,8 +42,11 @@ const sectionspage = () => {
       <Testimonials />
       <ExcitingMoments />
       <JoinTrip />
+
+  
     </>
   );
+  
 };
 
 export default sectionspage;
