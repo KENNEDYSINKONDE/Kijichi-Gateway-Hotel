@@ -4,7 +4,7 @@ import "./globals.css";
 import ResponsiveNav from "@/components/layout/ResponsiveNav";
 import Footer from "@/components/sections/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import Script from "next/script"; // ✅ Import Next.js Script
+// import Script from "next/script"; 
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -30,7 +30,7 @@ export default function RootLayout({
         <ScrollToTop />
 
         {/* ✅ Tawk.to Script added correctly */}
-        <Script id="tawk-to" strategy="afterInteractive">
+        {/* <Script id="tawk-to" strategy="afterInteractive">
           {`
             var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
             (function(){
@@ -43,7 +43,7 @@ export default function RootLayout({
               s0.parentNode.insertBefore(s1,s0);
             })();
           `}
-        </Script>
+        </Script> */}
       </body>
     </html>
   );
