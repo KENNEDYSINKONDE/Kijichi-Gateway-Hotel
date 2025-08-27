@@ -1,20 +1,12 @@
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class', // enables toggling with a class
   content: [
-    "./src/app/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        brand: {
-          white: "#ffffff",
-          blueDark: "#172554",
-          blue: "#2563eb",
-          yellow: "#facc15",
-        },
-      },
-    },
+    extend: {},
   },
   plugins: [],
-};
+}

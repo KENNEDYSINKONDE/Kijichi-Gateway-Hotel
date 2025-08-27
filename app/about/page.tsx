@@ -20,7 +20,7 @@ const AboutPage: React.FC = () => {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+        <div className="absolute inset-0 flex items-center justify-center top-[10rem] bg-black/40">
           <h1 className="text-3xl font-bold text-center text-white md:text-5xl lg:text-6xl" data-aos="fade-down">
             {aboutData.heading}
           </h1>

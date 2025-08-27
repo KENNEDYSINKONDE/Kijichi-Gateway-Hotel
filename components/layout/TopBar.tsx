@@ -1,6 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 import Link from "next/link";
 
 const socialIcons = [
@@ -10,120 +18,116 @@ const socialIcons = [
   { icon: <FaYoutube />, url: "https://youtube.com" },
 ];
 
-const topLinks = [
-  { label: "Contact", url: "/contact" },
+const contactInfo = [
   {
-    label: "Sports & Games",
-    children: [
-      { label: "Football", url: "/sports/football" },
-      { label: "Basketball", url: "/sports/basketball" },
-      { label: "Swimming", url: "/sports/swimming" },
-    ],
+    icon: <FaEnvelope />,
+    label: "m.makata@gatewayhotel.co.tz",
+    url: "mailto:m.makata@gatewayhotel.co.tz",
   },
   {
-    label: "Aerobic",
-    children: [
-      { label: "Morning Class", url: "/aerobic/morning" },
-      { label: "Evening Class", url: "/aerobic/evening" },
-    ],
+    icon: <FaPhone />,
+    label: "+255 299 040 463 / +255 765 057 028",
+    url: "tel:+255299040463",
   },
-  { label: "FAQ", url: "/faq" },
+  {
+    icon: <FaMapMarkerAlt />,
+    label:
+      "Mihande Road, Mtoni Kijichi, Postal Code 15129, Temeke P.O. Box 1430, Dar es Salaam",
+    url: "#",
+  },
 ];
 
 const TopBar: React.FC = () => {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
-  const toggleDropdown = (label: string) =>
-    setOpenDropdown(openDropdown === label ? null : label);
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="w-full text-white bg-gray-900">
-      <div className="items-center justify-between hidden h-10 px-6 md:flex lg:px-20">
+    <div
+      className={`w-full transition-colors duration-300 z-[1000] ${
+        scrolled ? "bg-yellow-500 text-white" : "bg-transparent text-black"
+      }`}
+    >
+      {/* Desktop TopBar */}
+      <div className="items-center justify-between hidden h-12 px-6 md:flex lg:px-20">
         {/* Social Icons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           {socialIcons.map((item, idx) => (
-            <a key={idx} href={item.url} target="_blank" rel="noreferrer" className="transition hover:text-yellow-400">
+            <a
+              key={idx}
+              href={item.url}
+              target="_blank"
+              rel="noreferrer"
+              className={`transition ${
+                scrolled
+                  ? "text-white hover:text-yellow-400"
+                  : "text-black hover:text-yellow-400"
+              }`}
+            >
               {item.icon}
             </a>
           ))}
         </div>
 
-        {/* Top Links */}
-        <div className="flex items-center gap-6">
-          {topLinks.map((link, idx) => (
-            <div key={idx} className="relative">
-              {link.children ? (
-                <>
-                  <span
-                    onMouseEnter={() => setOpenDropdown(link.label)}
-                    onMouseLeave={() => setOpenDropdown(null)}
-                    className="transition cursor-pointer hover:text-yellow-400"
-                  >
-                    {link.label}
-                  </span>
-                  {/* Dropdown */}
-                  <div
-                    className={`absolute top-full left-0 w-48 p-4 bg-white text-black rounded-md shadow-lg transition-all duration-300 ${
-                      openDropdown === link.label ? "opacity-100 visible" : "opacity-0 invisible"
-                    }`}
-                  >
-                    {link.children.map((child, i) => (
-                      <Link key={i} href={child.url} className="block p-2 transition rounded-md hover:bg-gray-200">
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <Link href={link.url} className="transition hover:text-yellow-400">
-                  {link.label}
-                </Link>
-              )}
-            </div>
+        {/* Contact Info */}
+        <div className="flex items-center gap-6 text-sm">
+          {contactInfo.map((item, idx) => (
+            <Link
+              key={idx}
+              href={item.url}
+              className={`flex items-center gap-2 break-words transition ${
+                scrolled
+                  ? "text-white hover:text-yellow-400"
+                  : "text-black hover:text-yellow-400"
+              }`}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </Link>
           ))}
         </div>
       </div>
 
       {/* Mobile TopBar */}
-      <div className="relative flex md:hidden">
-        {/* Social Icons Vertical */}
-        <div className="fixed top-[12vh] left-0 flex flex-col gap-4 bg-gray-900 p-2 rounded-tr-lg z-[1000]">
+      <div className="flex flex-col gap-3 px-4 py-3 md:hidden">
+        {/* Social Icons */}
+        <div className="flex gap-4">
           {socialIcons.map((item, idx) => (
-            <a key={idx} href={item.url} target="_blank" rel="noreferrer" className="text-xl transition hover:text-yellow-400">
+            <a
+              key={idx}
+              href={item.url}
+              target="_blank"
+              rel="noreferrer"
+              className={`text-xl transition ${
+                scrolled
+                  ? "text-white hover:text-yellow-400"
+                  : "text-black hover:text-yellow-400"
+              }`}
+            >
               {item.icon}
             </a>
           ))}
         </div>
 
-        {/* Scrollable Links */}
-        <div className="flex w-full gap-6 px-4 py-2 overflow-x-auto bg-gray-900 whitespace-nowrap">
-          {topLinks.map((link, idx) => (
-            <div key={idx} className="relative inline-block">
-              {link.children ? (
-                <>
-                  <span
-                    onClick={() => toggleDropdown(link.label)}
-                    className="transition cursor-pointer hover:text-yellow-400"
-                  >
-                    {link.label}
-                  </span>
-                  {/* Mobile Dropdown */}
-                  {openDropdown === link.label && (
-                    <div className="absolute left-0 w-48 p-4 mt-2 text-black bg-white rounded-md shadow-lg top-full animate-slide-down">
-                      {link.children.map((child, i) => (
-                        <Link key={i} href={child.url} className="block p-2 transition rounded-md hover:bg-gray-200">
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Link href={link.url} className="transition hover:text-yellow-400">
-                  {link.label}
-                </Link>
-              )}
-            </div>
+        {/* Contact Info */}
+        <div className="flex flex-col gap-2 text-sm">
+          {contactInfo.map((item, idx) => (
+            <Link
+              key={idx}
+              href={item.url}
+              className={`flex items-start gap-2 transition ${
+                scrolled
+                  ? "text-white hover:text-yellow-400"
+                  : "text-black hover:text-yellow-400"
+              }`}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </Link>
           ))}
         </div>
       </div>
